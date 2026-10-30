@@ -11,7 +11,7 @@ class WizardTest {
     // Set up a new wizard before every single test
     @Before
     fun setUp() {
-        
+
         evilWizard = Wizard("Evil Wizard", 30, 10)
     }
 
@@ -32,5 +32,19 @@ class WizardTest {
         assertEquals(0, damageDealt)
 
         assertEquals(5, evilWizard.mana) // mana still is 5
+    }
+
+    @Test
+    fun restoreMana_amountAddedExceedsOneHundred_manaSetToOneHundred() {
+        evilWizard.restoreMana(80) // 30 + 80 = 110, so mana should be set to 100
+
+        assertEquals(100, evilWizard.mana)
+    }
+
+    @Test
+    fun restoreMana_amountAddedDoesNotExceedOneHundred_manaIncreasesCorrectly() {
+        evilWizard.restoreMana(40) // 30 + 40 = 70, so mana should be set to 70
+
+        assertEquals(70, evilWizard.mana)
     }
 }
